@@ -6,7 +6,9 @@ import java.util.concurrent.TimeUnit;
 
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.TestName;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +17,14 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import webdriver.java.suporte.Generator;
+import webdriver.java.suporte.Screenshot;
+
 public class InfoUserTest {
     private WebDriver navegador;
 
+    @Rule
+    public TestName test = new TestName();
     @Before
     public void setUp(){
         //Abrindo o Navegador
@@ -92,6 +99,8 @@ public class InfoUserTest {
         final String mensagem = mensagemPop.getText();
         assertEquals("Rest in peace, dear phone!", mensagem);
 
+        String screenshotArquivo = "G:\\dev\\projects\\TestAutomationJava\\screenshots\\" + Generator.dataHoraParaArquivo() + "-" + test.getMethodName() + ".png";
+        Screenshot.tirar(navegador, screenshotArquivo);
         //Aguardar até 10 segundo para que a janela desapareça
         WebDriverWait aguardar = new WebDriverWait(navegador, 10);
         aguardar.until(ExpectedConditions.stalenessOf(mensagemPop));
