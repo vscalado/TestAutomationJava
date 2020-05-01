@@ -45,4 +45,5 @@ public class InfoUserTest {
         //Fechar o Navegador
         navegador.quit();
     }
+    
 }
