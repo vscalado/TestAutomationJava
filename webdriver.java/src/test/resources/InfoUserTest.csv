@@ -1,0 +1,8 @@
+testAdicionarContatoUsuario,tipo,contato,mensagem
+                           ,Phone,+5519991537896,Your contact has been added!
+                           ,Phone,+5519991537897,Your contact has been added!
+                           ,Phone,+5519991537898,Your contact has been added!
+testRemoverUmContatoUsuario,contatoRe,mensagemRe
+                           ,+5519991537896,"Rest in peace, dear phone!"
+                           ,+5519991537897,"Rest in peace, dear phone!"
+                           ,+5519991537898,"Rest in peace, dear phone!"

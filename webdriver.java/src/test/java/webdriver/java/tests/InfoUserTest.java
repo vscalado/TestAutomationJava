@@ -4,11 +4,15 @@ import static org.junit.Assert.*;
 
 import java.util.concurrent.TimeUnit;
 
+import org.easetech.easytest.annotation.DataLoader;
+import org.easetech.easytest.annotation.Param;
+import org.easetech.easytest.runner.DataDrivenTestRunner;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TestName;
+import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +24,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import webdriver.java.suporte.Generator;
 import webdriver.java.suporte.Screenshot;
 
+@RunWith(DataDrivenTestRunner.class)
+@DataLoader(filePaths = "InfoUserTest.csv")
 public class InfoUserTest {
     private WebDriver navegador;
 
@@ -27,7 +33,6 @@ public class InfoUserTest {
     public TestName test = new TestName();
     @Before
     public void setUp(){
-        //Abrindo o Navegador
         System.setProperty("webdriver.chrome.driver", "G:\\Path\\chromedriver.exe");
         navegador = new ChromeDriver();
         navegador.manage().window().maximize();
@@ -61,8 +66,9 @@ public class InfoUserTest {
         navegador.findElement(By.linkText("MORE DATA ABOUT YOU")).click();
     }
 
-    //@Test
-    public void testAdicionarUmaInformacaoAdicionalDoSuauario() {
+    @Test
+    public void testAdicionarContatoUsuario(@Param(name="tipo") final String tipo,
+            @Param(name = "contato") final String contato, @Param(name = "mensagem") final String mensagemEsperada) {
         //Clicar no botão "+ADD MERE DATA" //div[@id="moredata"]/div/button[@data-target="addmoredata"]
         navegador.findElement(By.xpath("//div[@id=\"moredata\"]/div/button[@data-target=\"addmoredata\"]")).click();
 
@@ -71,10 +77,10 @@ public class InfoUserTest {
 
         // Na combo de name type, escolher a opção "Phone"
         final WebElement campoType = popupAddMoreData.findElement(By.name("type"));
-        new Select(campoType).selectByVisibleText("Phone");
+        new Select(campoType).selectByVisibleText(tipo);
 
         // No campo de name=contact digitar +5519991537896
-        popupAddMoreData.findElement(By.name("contact")).sendKeys("+5519991537896");
+        popupAddMoreData.findElement(By.name("contact")).sendKeys(contato);
 
         // Clicar No link de text SAVE que esta na popup
         popupAddMoreData.findElement(By.linkText("SAVE")).click();
@@ -83,13 +89,19 @@ public class InfoUserTest {
         // added!
         final WebElement mensagemPop = navegador.findElement(By.id("toast-container"));
         final String mensagem = mensagemPop.getText();
-        assertEquals("Your contact has been added!", mensagem);
+        assertEquals(mensagemEsperada, mensagem);
+        //ScreenShot
+        final String screenshotArquivo = "G:\\dev\\projects\\TestAutomationJava\\screenshots\\"
+                + Generator.dataHoraParaArquivo() + "-" + test.getMethodName() + ".png";
+        Screenshot.tirar(navegador, screenshotArquivo);
     }
 
     @Test
-    public void removerUmContatoDeUmUsuario(){
+    public void testRemoverUmContatoUsuario(@Param(name="contatoRe") final String contato, @Param(name="mensagemRe") final String mensagemEsperada){
         //Clicar no  elemento pelo seu xpath "//span[text()="+5519991537896"]/following-sibling::a"
-        navegador.findElement(By.xpath("//span[text()=\"+5519991537896\"]/following-sibling::a")).click();
+        final String contatoRemover = "//span[text()=\"" + contato + "\"]/following-sibling::a";
+        //System.out.println(contatoRemover);
+        navegador.findElement(By.xpath(contatoRemover)).click();
 
         //Confirmar a janela JavaScript
         navegador.switchTo().alert().accept();
@@ -97,12 +109,13 @@ public class InfoUserTest {
         //Validar que a mensagem "Rest in peace,dear phone!"
         final WebElement mensagemPop = navegador.findElement(By.id("toast-container"));
         final String mensagem = mensagemPop.getText();
-        assertEquals("Rest in peace, dear phone!", mensagem);
+        assertEquals(mensagemEsperada, mensagem);
 
-        String screenshotArquivo = "G:\\dev\\projects\\TestAutomationJava\\screenshots\\" + Generator.dataHoraParaArquivo() + "-" + test.getMethodName() + ".png";
+        final String screenshotArquivo = "G:\\dev\\projects\\TestAutomationJava\\screenshots\\"
+                + Generator.dataHoraParaArquivo() + "-" + test.getMethodName() + ".png";
         Screenshot.tirar(navegador, screenshotArquivo);
-        //Aguardar até 10 segundo para que a janela desapareça
-        WebDriverWait aguardar = new WebDriverWait(navegador, 10);
+        // Aguardar até 10 segundo para que a janela desapareça
+        final WebDriverWait aguardar = new WebDriverWait(navegador, 10);
         aguardar.until(ExpectedConditions.stalenessOf(mensagemPop));
 
         //Clicar no link com Text "Logout"
