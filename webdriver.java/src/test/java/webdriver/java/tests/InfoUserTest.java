@@ -2,8 +2,6 @@ package webdriver.java.tests;
 
 import static org.junit.Assert.*;
 
-import java.util.concurrent.TimeUnit;
-
 import org.easetech.easytest.annotation.DataLoader;
 import org.easetech.easytest.annotation.Param;
 import org.easetech.easytest.runner.DataDrivenTestRunner;
@@ -16,13 +14,13 @@ import org.junit.runner.RunWith;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import webdriver.java.suporte.Generator;
 import webdriver.java.suporte.Screenshot;
+import webdriver.java.suporte.Web;
 
 @RunWith(DataDrivenTestRunner.class)
 @DataLoader(filePaths = "InfoUserTest.csv")
@@ -33,14 +31,7 @@ public class InfoUserTest {
     public TestName test = new TestName();
     @Before
     public void setUp(){
-        System.setProperty("webdriver.chrome.driver", "G:\\Path\\chromedriver.exe");
-        navegador = new ChromeDriver();
-        navegador.manage().window().maximize();
-        navegador.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
-
-        // Navegando para a pagina Taskit
-        navegador.get("http://www.juliodelima.com.br/taskit");
-
+        navegador = Web.createChrome();
         //Clicar no link que possui o texto "Sign in"
         //navegador.findElement(By.linkText("Sign in")).click();
         final WebElement linkSignIn = navegador.findElement(By.linkText("Sign in"));
@@ -122,6 +113,7 @@ public class InfoUserTest {
         navegador.findElement(By.linkText("Logout")).click();
 
     }
+    
     @After
     public void tearDown(){
         //Fechar o Navegador
