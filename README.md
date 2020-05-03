@@ -7,4 +7,4 @@
 
 - **[Test Resource](https://github.com/vscalado/TestAutomationJava/tree/master/webdriver.java/src/test/java/webdriver/java/suporte)**
 
-- **[Test PagesObjects](https://github.com/vscalado/TestAutomationJava/tree/master/webdriver.java/src/test/java/webdriver/java/suporte)**
+- **[Test PagesObjects](https://github.com/vscalado/TestAutomationJava/tree/master/webdriver.java/src/test/java/webdriver/java/pages)**
