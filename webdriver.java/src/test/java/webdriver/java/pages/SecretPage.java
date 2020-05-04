@@ -7,7 +7,7 @@ public class SecretPage extends BasePage{
 
     public SecretPage(WebDriver navegador) {
         super(navegador);
-        // TODO Auto-generated constructor stub
+
     }
 
     public MePage clickMe(){

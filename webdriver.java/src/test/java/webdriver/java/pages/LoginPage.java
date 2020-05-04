@@ -5,9 +5,8 @@ import org.openqa.selenium.WebDriver;
 
 public class LoginPage extends BasePage{
 
-    public LoginPage(WebDriver navegador) {
+    public LoginPage(final WebDriver navegador) {
         super(navegador);
-        // TODO Auto-generated constructor stub
     }
 
     public LoginFormPage clickSignIn() {
