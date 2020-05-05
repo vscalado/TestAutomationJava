@@ -10,8 +10,8 @@
 
 ## Escrita comum de  testes
 
-![PageObjectsCode](https://user-images.githubusercontent.com/53017019/81024909-45070200-8e4b-11ea-98f7-65979b09e223.png)
+
 
 ## Escrita de Teste em PageObjects
 
-:::image type="content" source="webdriver.java/PageObjectsCode.png" alt-text="Page Object Code Form":::
+![PageObjectsCode](https://user-images.githubusercontent.com/53017019/81024909-45070200-8e4b-11ea-98f7-65979b09e223.png)
