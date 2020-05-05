@@ -10,7 +10,7 @@
 
 ## Escrita comum de  testes
 
-
+![CommonCode](https://user-images.githubusercontent.com/53017019/81024977-89929d80-8e4b-11ea-96fa-c7e9bf7d6d60.png)
 
 ## Escrita de Teste em PageObjects
 
