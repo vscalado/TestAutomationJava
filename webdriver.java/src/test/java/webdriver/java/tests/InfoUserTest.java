@@ -58,24 +58,21 @@ public class InfoUserTest {
     }
 
     @Test
-    public void testAdicionarContatoUsuario(@Param(name="tipo") final String tipo,
-            @Param(name = "contato") final String contato, @Param(name = "mensagem") final String mensagemEsperada) {
+    public void testAdicionarContatoUsuario(
+        @Param(name="tipo") final String tipo,
+            @Param(name = "contato") final String contato, 
+            @Param(name = "mensagem") final String mensagemEsperada) {
         //Clicar no botão "+ADD MERE DATA" //div[@id="moredata"]/div/button[@data-target="addmoredata"]
         navegador.findElement(By.xpath("//div[@id=\"moredata\"]/div/button[@data-target=\"addmoredata\"]")).click();
-
         //Identificar onde esta o formulario de id=addmore-data
         final WebElement popupAddMoreData = navegador.findElement(By.id("addmoredata"));
-
         // Na combo de name type, escolher a opção "Phone"
         final WebElement campoType = popupAddMoreData.findElement(By.name("type"));
         new Select(campoType).selectByVisibleText(tipo);
-
         // No campo de name=contact digitar +5519991537896
         popupAddMoreData.findElement(By.name("contact")).sendKeys(contato);
-
         // Clicar No link de text SAVE que esta na popup
         popupAddMoreData.findElement(By.linkText("SAVE")).click();
-
         // Na mensagem de id toast-container validar que o texto é Your contact has been
         // added!
         final WebElement mensagemPop = navegador.findElement(By.id("toast-container"));

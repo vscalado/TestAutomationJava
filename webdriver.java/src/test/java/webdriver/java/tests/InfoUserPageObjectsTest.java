@@ -45,10 +45,7 @@ public class InfoUserPageObjectsTest {
                 .clickButtonAddMoreDataAboutYou()
                 .addContact(tipo, contato)
                 .captureToastText();
-                
         assertEquals(mensagem, toastText);
-
-
     }
 
     @After
