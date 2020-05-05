@@ -10,7 +10,7 @@
 
 ## Escrita comum de  testes
 
-:::image type="content" source="webdriver.java/CommonCode.png" alt-text="Common Code Form":::
+![PageObjectsCode](https://user-images.githubusercontent.com/53017019/81024909-45070200-8e4b-11ea-98f7-65979b09e223.png)
 
 ## Escrita de Teste em PageObjects
 
